@@ -112,7 +112,7 @@ public class NFCService {
 				//Log.d(TAG, ">>>>>>>>>>>>>>>> context is Null");
 			}
 		} catch (Exception e) {
-			LogUtils.LOGE(TAG, e.getMessage());
+//			LogUtils.LOGE(TAG, e.getMessage());
 		}
 	}
 
@@ -280,7 +280,7 @@ public class NFCService {
 		//Save Point READ
 		SavePointBlock[0] += (byte)resultBlock1[3];
 		SavePointBlock[1] += (byte)resultBlock1[4];
-		LogUtils.LOGE(TAG, "now_i_want_information " + ByteUtil.ConvertHexByteArrayToString(resultBlock1));
+//		LogUtils.LOGE(TAG, "now_i_want_information " + ByteUtil.ConvertHexByteArrayToString(resultBlock1));
 		cpt = 0;
 		resultBlock1 = null;
 		while ((resultBlock1 == null || resultBlock1[0] == 1) && cpt < 10) {
@@ -289,7 +289,7 @@ public class NFCService {
 			//Used for DEBUG : Log.v("CPT ", " CPT Read Block 0 ===> " + String.valueOf(cpt));
 		}
 
-        LogUtils.LOGE(TAG, "resultBlock1: " + ByteUtil.ConvertHexByteArrayToString(resultBlock1));
+//        LogUtils.LOGE(TAG, "resultBlock1: " + ByteUtil.ConvertHexByteArrayToString(resultBlock1));
 
 		//Max n Count READ
 		MaxCountBlock[0] += (byte)resultBlock1[1];
@@ -333,11 +333,11 @@ public class NFCService {
 		BgmMsgBlock[0] += (byte)resultBlock1[3];
 		BgmMsgBlock[1] += (byte)resultBlock1[4];
 
-        LogUtils.LOGE(TAG, "nCountBlock: " + ByteUtil.ConvertHexByteArrayToString(nCountBlock));
-        LogUtils.LOGE(TAG, "SavePointBlock: " + ByteUtil.ConvertHexByteArrayToString(SavePointBlock));
-        LogUtils.LOGE(TAG, "MaxCountBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(MaxCountBlock)));
-        LogUtils.LOGE(TAG, "GlucoseErrMsgBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(GlucoseErrMsgBlock)));
-        LogUtils.LOGE(TAG, "BgmMsgBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(BgmMsgBlock)));
+//        LogUtils.LOGE(TAG, "nCountBlock: " + ByteUtil.ConvertHexByteArrayToString(nCountBlock));
+//        LogUtils.LOGE(TAG, "SavePointBlock: " + ByteUtil.ConvertHexByteArrayToString(SavePointBlock));
+//        LogUtils.LOGE(TAG, "MaxCountBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(MaxCountBlock)));
+//        LogUtils.LOGE(TAG, "GlucoseErrMsgBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(GlucoseErrMsgBlock)));
+//        LogUtils.LOGE(TAG, "BgmMsgBlock: " + String.valueOf(ByteUtil.Convert2bytesHexaFormatToInt(BgmMsgBlock)));
 
 
 		MaxCount = ByteUtil.Convert2bytesHexaFormatToInt(MaxCountBlock);
@@ -373,7 +373,7 @@ public class NFCService {
 				if(ByteUtil.Convert2bytesHexaFormatToInt(nCountBlock) > 500) numberOfBlockToRead = 500 * 3 + 17;
 				else numberOfBlockToRead = ByteUtil.Convert2bytesHexaFormatToInt(nCountBlock) * 3 + 17;
 
-                LogUtils.LOGE(TAG, "numberOfBlockToRead: " + String.valueOf(numberOfBlockToRead));
+//                LogUtils.LOGE(TAG, "numberOfBlockToRead: " + String.valueOf(numberOfBlockToRead));
 
 				if(numberOfBlockToRead > 0) {
 					fullNdefMessage = new byte[numberOfBlockToRead * 4];
@@ -407,9 +407,9 @@ public class NFCService {
 						fullNdefMessage[33] ^ fullNdefMessage[34] ^ fullNdefMessage[35] ^ fullNdefMessage[36]);
 
 				//LogUtils.LOGE(TAG, "Serial Number :" + ByteUtil.ConvertHexByteArrayToString(nfcSerialNumber));
-                LogUtils.LOGE(TAG, "Serial Number :" + ByteUtil.ConvertHexByteToString(fullNdefMessage[25]));
-                LogUtils.LOGE(TAG, "real CHK :" + ByteUtil.ConvertHexByteToString(fullNdefMessage[60]));
-                LogUtils.LOGE(TAG, "temp CHK:" + ByteUtil.ConvertHexByteToString(tempChecksum));
+//                LogUtils.LOGE(TAG, "Serial Number :" + ByteUtil.ConvertHexByteToString(fullNdefMessage[25]));
+//                LogUtils.LOGE(TAG, "real CHK :" + ByteUtil.ConvertHexByteToString(fullNdefMessage[60]));
+//                LogUtils.LOGE(TAG, "temp CHK:" + ByteUtil.ConvertHexByteToString(tempChecksum));
 
 				asciiSerialNumber.setLength(0);
 
@@ -418,9 +418,9 @@ public class NFCService {
 				}
 
 				if(fullNdefMessage[60] == tempChecksum){
-                    LogUtils.LOGE(TAG, "시리얼번호를 확인하였습니다.");
+//                    LogUtils.LOGE(TAG, "시리얼번호를 확인하였습니다.");
 				} else {
-                    LogUtils.LOGE(TAG, "시리얼번호를 확인하지 못하였습니다.");
+//                    LogUtils.LOGE(TAG, "시리얼번호를 확인하지 못하였습니다.");
 					errCtlFlag = 7;
 					fullNdefMessage = null;
 					return false;
@@ -554,7 +554,7 @@ public class NFCService {
 			try {
 				nfcDevice.getCurrentTag().connect();
 			} catch (IOException e) {
-                LogUtils.LOGE(TAG, ">>>>>>> nfc tag connect error", e);
+//                LogUtils.LOGE(TAG, ">>>>>>> nfc tag connect error", e);
 			}
 		}
 
@@ -1015,7 +1015,7 @@ public class NFCService {
 			}
 			catch(Exception e)
 			{
-                LogUtils.LOGE(TAG, ">>>>>>>> error", e);
+//                LogUtils.LOGE(TAG, ">>>>>>>> error", e);
 				errorOccured++;
 				//Used for DEBUG : //Log.i("NFCCOmmand", "Write Single block command  " + errorOccured);
 				if(errorOccured == 2)

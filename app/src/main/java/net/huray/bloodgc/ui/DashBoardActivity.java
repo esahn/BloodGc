@@ -18,7 +18,7 @@ public class DashBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NFCApp.getDataStore().delete(BloodGlucose.class).get().value();
+//        NFCApp.getDataStore().delete(BloodGlucose.class).get().value();
         setContentView(R.layout.activity_dashboard);
     }
 
