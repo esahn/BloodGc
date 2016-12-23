@@ -28,6 +28,15 @@
         <activity
             android:name=".ui.RecordListActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="record"
+                    android:scheme="selphone"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.SyncBgmActivity"
@@ -42,6 +51,17 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter"/>
         </activity>
+        <receiver
+            android:name="net.huray.bloodgc.widget.WidgetProvider"
+            android:label="BloodGc" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider_basic" />
+        </receiver>
     </application>
 
 </manifest>

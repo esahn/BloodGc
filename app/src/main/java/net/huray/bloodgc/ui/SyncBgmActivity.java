@@ -2,6 +2,7 @@ package net.huray.bloodgc.ui;
 
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
@@ -22,6 +23,7 @@ import net.huray.bloodgc.R;
 import net.huray.bloodgc.model.BloodGlucose;
 import net.huray.bloodgc.nfc.NFCService;
 import net.huray.bloodgc.util.ApiUtils;
+import net.huray.bloodgc.widget.WidgetProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -175,6 +177,7 @@ public class SyncBgmActivity extends AppCompatActivity {
     private void insertDataListToDB() {
         if (mGlucoseList != null) {
             NFCApp.getDataStore().insert(mGlucoseList);
+            sendReceverToWidget();
             insertSuccess();
         } else {
             Log.d(TAG, "to insert data is null");
@@ -189,6 +192,12 @@ public class SyncBgmActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DashBoardActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void sendReceverToWidget(){
+        Intent intent = new Intent(this, WidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        sendBroadcast(intent);
     }
 
     private BloodGlucose createFromBytes(byte[] data, int offset) {
@@ -279,7 +288,7 @@ public class SyncBgmActivity extends AppCompatActivity {
             if (!nfcService.chkReadData()) {
 //                return RESULT_ERROR_CHECK_DATA; // check-data error
             } else {
-                LogUtils.LOGD(TAG, ">>>>>>>>>>>>>>> NFC CheckData OK!!");
+//                LogUtils.LOGD(TAG, ">>>>>>>>>>>>>>> NFC CheckData OK!!");
                 showData(nfcService.getNDEFMessage());
             }
 //            String sn = nfcService.getSerialNumber();
