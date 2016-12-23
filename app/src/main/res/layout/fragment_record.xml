@@ -5,8 +5,7 @@
     android:id="@+id/activity_record"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.huray.bloodgc.RecordFragment"
-    android:background="#000">
+    tools:context="net.huray.bloodgc.ui.RecordFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_glucose_list"
