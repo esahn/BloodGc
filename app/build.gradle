@@ -31,4 +31,6 @@ dependencies {
     compile 'io.requery:requery:1.0.1'
     compile 'io.requery:requery-android:1.0.1'
     apt 'io.requery:requery-processor:1.0.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 }

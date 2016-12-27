@@ -9,17 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+
 import net.huray.bloodgc.NFCApp;
 import net.huray.bloodgc.R;
 import net.huray.bloodgc.model.BloodGlucose;
 
 
-public class DashBoardActivity extends AppCompatActivity {
+public class DashBoardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        NFCApp.getDataStore().delete(BloodGlucose.class).get().value();
         setContentView(R.layout.activity_dashboard);
+
+//        UserManagement.requestLogout(new LogoutResponseCallback() {
+//            @Override
+//            public void onCompleteLogout() {
+//                redirectLoginActivity();
+//            }
+//        });
     }
 
     @Override

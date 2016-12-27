@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">BloodGc</string>
+    <string name="kakao_app_key">7384e3c27c91b563784222b9dc2321ee</string>
+    <string name="text_for_login_kakao_account">Log in with Kakao</string>
+    <string name="error_message_for_service_unavailable">Unstable network connection. \nPlease try again later.</string>
     <!--Screen Name-->
     <string name="dash_board_screen">대시보드 화면</string>
     <string name="record_screen">기록보기 화면</string>
