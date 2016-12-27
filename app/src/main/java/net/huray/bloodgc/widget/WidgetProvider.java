@@ -127,11 +127,11 @@ public class WidgetProvider extends AppWidgetProvider {
         try {
             if (glucose == null) {
                 updateViews.setTextViewText(R.id.tv_mesure_date,
-                        "측정시간: " + context.getString(R.string.not_have_record));
+                        context.getString(R.string.not_have_record));
             } else {
                 Date mesureTime = beforeFormat.parse(glucose.getRecordDttm());
                 updateViews.setTextViewText(R.id.tv_mesure_date,
-                        mFormat.format(mesureTime));
+                        "측정시간: " + mFormat.format(mesureTime));
 
                 updateViews.setTextViewText(R.id.tv_mesure_value,
                         "혈당치: " + glucose.getMeasure());
