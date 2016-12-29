@@ -16,6 +16,7 @@
 package net.huray.bloodgc.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -103,6 +104,10 @@ public class SignupActivity extends BaseActivity {
 
             @Override
             public void onSuccess(UserProfile userProfile) {
+                SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean(SyncBgmActivity.LOG_IN_STATE, true);
+                editor.apply();
                 redirectMainActivity();
             }
 

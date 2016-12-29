@@ -17,11 +17,9 @@ package net.huray.bloodgc.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.KakaoSDK;
 import com.kakao.auth.Session;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
@@ -50,7 +48,7 @@ public class LoginActivity extends BaseActivity {
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         if (!Session.getCurrentSession().checkAndImplicitOpen()) {
-            setContentView(R.layout.layout_common_kakao_login);
+            setContentView(R.layout.activity_login);
         }
     }
 
@@ -84,7 +82,7 @@ public class LoginActivity extends BaseActivity {
                 Logger.e(exception);
             }
             Toast.makeText(LoginActivity.this, "failed", Toast.LENGTH_LONG).show();
-            setContentView(R.layout.layout_common_kakao_login);
+            setContentView(R.layout.activity_login);
         }
     }
 }

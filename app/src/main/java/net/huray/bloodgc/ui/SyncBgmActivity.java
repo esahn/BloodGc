@@ -5,12 +5,12 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,9 +34,10 @@ import io.requery.Persistable;
 import io.requery.sql.EntityDataStore;
 
 
-public class SyncBgmActivity extends AppCompatActivity {
+public class SyncBgmActivity extends BaseActivity {
     private static final TimeZone KOREA_TIME = TimeZone.getTimeZone("GMT+09:00");
     private static final String TAG = "DASH_BOARD_ACTIVITY";
+    public static final String LOG_IN_STATE = "LOG_IN_STATE";
     RecordFragment mFragment;
     Button mBtnSave;
     NfcAdapter mNfcAdapter; // NFC 어댑터
@@ -48,6 +49,12 @@ public class SyncBgmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        Boolean logIn = pref.getBoolean(LOG_IN_STATE, false);
+        if(!logIn){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
             assert actionBar != null;
@@ -200,6 +207,8 @@ public class SyncBgmActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
+
+
     private BloodGlucose createFromBytes(byte[] data, int offset) {
         BloodGlucose glucose = new BloodGlucose();
 
@@ -248,6 +257,34 @@ public class SyncBgmActivity extends AppCompatActivity {
         TextView hideText = (TextView)findViewById(R.id.please_tag_bgm);
         hideText.setVisibility(View.INVISIBLE);
     }
+
+//    private void requestAccessTokenInfo() {
+//        AuthService.requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
+//            @Override
+//            public void onSessionClosed(ErrorResult errorResult) {
+//                redirectLoginActivity(self);
+//            }
+//
+//            @Override
+//            public void onNotSignedUp() {
+//                // not happened
+//            }
+//
+//            @Override
+//            public void onFailure(ErrorResult errorResult) {
+//                Logger.e("failed to get access token info. msg=" + errorResult);
+//            }
+//
+//            @Override
+//            public void onSuccess(AccessTokenInfoResponse accessTokenInfoResponse) {
+//                long userId = accessTokenInfoResponse.getUserId();
+//                Logger.d("this access token is for userId=" + userId);
+//
+//                long expiresInMilis = accessTokenInfoResponse.getExpiresInMillis();
+//                Logger.d("this access token expires after " + expiresInMilis + " milliseconds.");
+//            }
+//        });
+//    }
 
     private class NfcReadThread extends Thread {
         private static final int BLOCK_SIZE = 12;

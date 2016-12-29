@@ -1,6 +1,7 @@
 package net.huray.bloodgc.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,12 +25,13 @@ public class DashBoardActivity extends BaseActivity {
 //        NFCApp.getDataStore().delete(BloodGlucose.class).get().value();
         setContentView(R.layout.activity_dashboard);
 
-//        UserManagement.requestLogout(new LogoutResponseCallback() {
-//            @Override
-//            public void onCompleteLogout() {
-//                redirectLoginActivity();
-//            }
-//        });
+
+        Button LogoutButton = (Button) findViewById(R.id.btn_logout);
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Logout();
+            }
+        });
     }
 
     @Override
@@ -50,6 +52,23 @@ public class DashBoardActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void Logout(){
+        saveLogoutState();
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                redirectLoginActivity();
+            }
+        });
+    }
+
+    private void saveLogoutState(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(SyncBgmActivity.LOG_IN_STATE, false);
+        editor.apply();
     }
 
 }
